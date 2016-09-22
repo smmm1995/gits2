@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<style>
+form{
+    height:400px;
+margin: 0 auto;
+}
+    input{
+        display: block;
+    }
+
+</style>
+<body>
+<form action="">
+    <input type="text" name="name" placeholder="请输入姓名" autocomplete="off">
+    <input type="password" name="pwd" placeholder="请输入密码"  autocomplete="off">
+    <input type="password" name="pwd1" placeholder="请再次输入密码"  autocomplete="off">
+    <input type="text" name="address" placeholder="请输入地址"  autocomplete="off">
+    <button type="button" onclick="show()">提交</button>
+</form>
+<script>
+    function show() {
+        var p1 = document.querySelectorAll('input')[1].value
+        var p2 = document.querySelectorAll('input')[2].value
+        var n1 = document.querySelector('input').value
+        if (n1 != '' && p1 != '' && p2 != '') {
+            if (p1 == p2) {
+                var form = document.querySelector('form')
+                var xhr = new XMLHttpRequest()
+                var data = new FormData(form)
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        console.log('成功')
+                        console.log(xhr.responseText)
+                        alert('提交成功')
+
+                        location.href='/'
+                    }
+                }
+                xhr.open('POST', '/login')
+                xhr.send(data)
+            } else {
+                alert('输入密码不一样，请重新输入')
+            }
+            ``
+        }else{
+            alert('姓名和密码都不能为空')
+        }
+    }
+</script>
+</body>
+</html>
